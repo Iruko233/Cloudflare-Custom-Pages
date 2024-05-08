@@ -647,11 +647,7 @@
  }
 
  @media (prefers-color-scheme: dark) {
-  .left-sec {
-    filter: invert(85%);
-  }
-
-  .cf-captcha-box {
+  .left-sec:not(.cf-captcha-box) {
     filter: invert(85%);
   }
   
