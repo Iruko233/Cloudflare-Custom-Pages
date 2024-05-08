@@ -532,7 +532,6 @@
  }
 
  .left-sec {
-  filter: invert(85%);
    background-image: url('watermark.jpg');
    background-position: bottom;
    background-size: contain;
@@ -646,3 +645,17 @@
  .no-select {
    user-select: none;
  }
+
+ @media (prefers-color-scheme: dark) {
+  .left-sec {
+    filter: invert(85%);
+  }
+
+  .cf-captcha-box {
+    filter: invert(85%);
+  }
+  
+  .tip-text {
+    color: black;
+  }
+}
