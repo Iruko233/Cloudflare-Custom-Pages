@@ -646,17 +646,14 @@
    user-select: none;
  }
 
-.tip-text {
-  color: black;
- }
-/*
  @media (prefers-color-scheme: dark) {
+  /*
   .left-sec:not(.cf-captcha-box) {
     filter: invert(85%);
   }
+  */
   
   .tip-text {
     color: black;
   }
 }
-*/
