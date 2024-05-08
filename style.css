@@ -645,6 +645,10 @@
  .no-select {
    user-select: none;
  }
+
+.tip-text {
+  color: black;
+ }
 /*
  @media (prefers-color-scheme: dark) {
   .left-sec:not(.cf-captcha-box) {
