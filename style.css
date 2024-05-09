@@ -491,10 +491,11 @@ h1 {
     .show-tablet {
         display: none;
     }
-
+/*
     .left-sec {
         background-image: url('watermark.jpg') !important;
     }
+*/
 }
 
 @media(min-width: 768px) {
@@ -519,10 +520,11 @@ h1 {
     .anime-background {
         background-size: unset !important;
     }
-
+/*
     .left-sec {
         background-image: url('watermark.jpg') !important;
     }
+*/
 }
 
 @media (min-width: 992px) {
@@ -532,7 +534,9 @@ h1 {
 }
 
 .left-sec {
+/*
     background-image: url('watermark.jpg');
+ */
     background-position: bottom;
     background-size: contain;
     background-repeat: no-repeat;
