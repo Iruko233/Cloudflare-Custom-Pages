@@ -660,11 +660,9 @@ h1 {
         color: white !important;
     }
 
-    .sub-header h1 {
-        color: white !important;
-    }
-
-    .sub-footer ul li {
+    .left-sec p,
+    .left-sec ul li,
+    h1 {
         color: white;
     }
 }
