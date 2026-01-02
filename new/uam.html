@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <title>安全检查中...</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* =========================================
+       1. 基础样式 (风格统一)
+       ========================================= */
+    :root {
+      --bg-color-light: #ffffff;
+      --text-main-light: #111111;
+      --text-sub-light: #555555;
+      --accent-light: #000000;
+      
+      /* 深色模式：#1d1d1d */
+      --bg-color-dark: #1d1d1d;
+      --text-main-dark: #ffffff;
+      --text-sub-dark: #888888;
+      --pattern-dot-dark: rgba(255, 255, 255, 0.05);
+      --pattern-dot-light: rgba(0, 0, 0, 0.05);
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      height: 100%;
+    }
+    
+    body { margin: 0; height: 100%; overflow-x: hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* =========================================
+       2. 布局结构
+       ========================================= */
+    .container {
+      display: flex;
+      flex-direction: column-reverse;
+      min-height: 100vh;
+    }
+
+    .info-section {
+      background-color: var(--bg-color-light);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .visual-section {
+      flex: 1;
+      background-color: #fafafa;
+      position: relative;
+      min-height: 30vh;
+      background-image: radial-gradient(var(--pattern-dot-light) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+
+    .content-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* =========================================
+       3. 排版细节
+       ========================================= */
+    .divider {
+      width: 40px;
+      height: 4px;
+      background-color: var(--accent-light);
+      margin: 2rem 0;
+    }
+
+    h1.main-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-main-light);
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.05rem;
+      line-height: 1.1;
+    }
+
+    p.sub-text {
+      font-size: 1.1rem;
+      color: var(--text-main-light);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    
+    p.contact-info {
+      font-size: 0.95rem;
+      color: var(--text-sub-light);
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* 验证/加载组件容器 */
+    .challenge-box {
+      margin: 2rem 0;
+      min-height: 80px; /* 预留高度，防止加载时页面跳动 */
+      display: flex;
+      align-items: center;
+    }
+    
+    /* 对 CF 注入的组件做一些简单的样式重置，确保不破坏布局 */
+    .challenge-box form {
+        margin: 0 !important;
+    }
+
+    /* 底部页脚 */
+    .meta-footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #999;
+    }
+    
+    .meta-footer ul { padding: 0; list-style: none; margin: 0; }
+    .meta-footer li { display: inline-block; margin-right: 1rem; }
+
+    /* =========================================
+       4. 响应式
+       ========================================= */
+    @media (min-width: 768px) {
+      .container { flex-direction: row; }
+      .info-section { width: 50%; text-align: left; padding: 0 4rem; }
+      .visual-section { width: 50%; height: auto; }
+      h1.main-title { font-size: 3.5rem; }
+    }
+
+    /* =========================================
+       5. 深色模式适配
+       ========================================= */
+    @media (prefers-color-scheme: dark) {
+      .info-section, .visual-section { background-color: var(--bg-color-dark); }
+      
+      .visual-section { 
+        background-image: radial-gradient(var(--pattern-dot-dark) 1.5px, transparent 1.5px);
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.5); 
+      }
+      
+      h1.main-title { color: var(--text-main-dark); }
+      p.sub-text { color: #d1d1d1; }
+      p.contact-info, .meta-footer { color: var(--text-sub-dark); }
+      
+      .divider { background-color: #ffffff; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 左侧：文字 -->
+    <div class="info-section">
+      <div class="content-wrapper">
+        <div class="divider"></div>
+        <h1 class="main-title">安全检查中...</h1>
+        
+        <p class="sub-text">正在检查站点连接是否安全，<br>预计将会在 5 秒后重定向至您请求的页面</p>
+        
+        <!-- Cloudflare 5秒盾/验证组件 -->
+        <div class="challenge-box">
+          ::IM_UNDER_ATTACK_BOX::
+        </div>
+        
+        <p class="contact-info">如有疑问请联系管理员反馈</p>
+
+        <div class="meta-footer">
+          <ul>
+            <li>ID: ::RAY_ID::</li>
+            <li>IP: ::CLIENT_IP::</li>
+            <li>Performance & Security by Cloudflare</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：极简点阵背景 -->
+    <div class="visual-section">
+    </div>
+  </div>
+</body>
+</html>

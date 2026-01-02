@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <title>访问已被拦截</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* =========================================
+       1. 基础样式 (风格统一)
+       ========================================= */
+    :root {
+      --bg-color-light: #ffffff;
+      --text-main-light: #111111;
+      --text-sub-light: #555555;
+      --accent-light: #000000;
+      
+      /* 警示色 */
+      --error-bg-light: #fff5f5;
+      --error-text-light: #c53030;
+      
+      /* 深色模式：#1d1d1d */
+      --bg-color-dark: #1d1d1d;
+      --text-main-dark: #ffffff;
+      --text-sub-dark: #888888;
+      --pattern-dot-dark: rgba(255, 255, 255, 0.05);
+      --pattern-dot-light: rgba(0, 0, 0, 0.05);
+      
+      /* 深色模式警示色 */
+      --error-bg-dark: rgba(245, 101, 101, 0.1);
+      --error-text-dark: #fc8181;
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      height: 100%;
+    }
+    
+    body { margin: 0; height: 100%; overflow-x: hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* =========================================
+       2. 布局结构
+       ========================================= */
+    .container {
+      display: flex;
+      flex-direction: column-reverse;
+      min-height: 100vh;
+    }
+
+    .info-section {
+      background-color: var(--bg-color-light);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .visual-section {
+      flex: 1;
+      background-color: #fafafa;
+      position: relative;
+      min-height: 30vh;
+      background-image: radial-gradient(var(--pattern-dot-light) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+
+    .content-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* =========================================
+       3. 排版细节
+       ========================================= */
+    .divider {
+      width: 40px;
+      height: 4px;
+      background-color: var(--accent-light);
+      margin: 2rem 0;
+    }
+
+    h1.main-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-main-light);
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.05rem;
+      line-height: 1.1;
+    }
+
+    p.sub-text {
+      font-size: 1.1rem;
+      color: var(--text-main-light);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    p.contact-text {
+      font-size: 0.95rem;
+      color: var(--text-sub-light);
+      margin-bottom: 2rem;
+    }
+
+    /* IP 被封禁的特殊提示框 */
+    .blocked-notice {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      background-color: var(--error-bg-light);
+      border-left: 4px solid var(--error-text-light);
+      color: var(--error-text-light);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-block; /* 收缩宽度，不占满整行 */
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* 底部页脚 */
+    .meta-footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #999;
+    }
+    
+    .meta-footer ul { padding: 0; list-style: none; margin: 0; }
+    .meta-footer li { display: inline-block; margin-right: 1rem; }
+
+    /* =========================================
+       4. 响应式
+       ========================================= */
+    @media (min-width: 768px) {
+      .container { flex-direction: row; }
+      .info-section { width: 50%; text-align: left; padding: 0 4rem; }
+      .visual-section { width: 50%; height: auto; }
+      h1.main-title { font-size: 3.5rem; }
+    }
+
+    /* =========================================
+       5. 深色模式适配
+       ========================================= */
+    @media (prefers-color-scheme: dark) {
+      .info-section, .visual-section { background-color: var(--bg-color-dark); }
+      
+      .visual-section { 
+        background-image: radial-gradient(var(--pattern-dot-dark) 1.5px, transparent 1.5px);
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.5); 
+      }
+      
+      h1.main-title { color: var(--text-main-dark); }
+      p.sub-text { color: #d1d1d1; }
+      p.contact-text, .meta-footer { color: var(--text-sub-dark); }
+      
+      .blocked-notice {
+        background-color: var(--error-bg-dark);
+        color: var(--error-text-dark);
+        border-left-color: var(--error-text-dark);
+      }
+      
+      .divider { background-color: #ffffff; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 左侧：文字 -->
+    <div class="info-section">
+      <div class="content-wrapper">
+        <div class="divider"></div>
+        <h1 class="main-title">很抱歉，<br>您的访问已被拦截</h1>
+        
+        <p class="sub-text">您的请求触发了本站的 WAF 规则</p>
+        <p class="contact-text">如有疑问请联系管理员反馈</p>
+        
+        <!-- 禁止提示框 -->
+        <div class="blocked-notice">
+          您的 IP 地址被禁止访问本站
+        </div>
+
+        <div class="meta-footer">
+          <ul>
+            <li>ID: ::RAY_ID::</li>
+            <li>IP: ::CLIENT_IP::</li>
+            <li>Performance & Security by Cloudflare</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：极简点阵背景 -->
+    <div class="visual-section">
+    </div>
+  </div>
+</body>
+</html>
