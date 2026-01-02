@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <title>无法连接到服务器</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* =========================================
+       1. 基础重置与字体
+       使用系统无衬线字体，调整字间距使其更具现代感
+       ========================================= */
+    :root {
+      --bg-color-light: #ffffff;
+      --text-main-light: #111111;
+      --text-sub-light: #555555;
+      --accent-light: #000000;
+      
+      /* 您指定的深色模式颜色 */
+      --bg-color-dark: #1d1d1d;
+      --text-main-dark: #ffffff;
+      --text-sub-dark: #888888;
+      --pattern-dot-dark: rgba(255, 255, 255, 0.05); /* 极淡的白点 */
+      --pattern-dot-light: rgba(0, 0, 0, 0.05);     /* 极淡的黑点 */
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      height: 100%;
+    }
+    
+    body { margin: 0; height: 100%; overflow-x: hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* =========================================
+       2. 布局 (Flexbox)
+       ========================================= */
+    .container {
+      display: flex;
+      flex-direction: column-reverse; /* 手机端：图在上(代码逻辑下)，文在下 */
+      min-height: 100vh;
+    }
+
+    /* 左侧：内容区域 */
+    .info-section {
+      background-color: var(--bg-color-light);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 右侧：视觉区域 (纯CSS纹理) */
+    .visual-section {
+      flex: 1;
+      background-color: #fafafa; /* 浅色模式下的微灰背景 */
+      position: relative;
+      min-height: 30vh;
+      
+      /* 核心：CSS绘制的点阵纹理，代替图片 */
+      background-image: radial-gradient(var(--pattern-dot-light) 1.5px, transparent 1.5px);
+      background-size: 24px 24px; /* 点的间距 */
+    }
+
+    /* =========================================
+       3. 字体排版
+       ========================================= */
+    .content-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    h1.main-title {
+      font-size: 2.5rem;
+      font-weight: 800; /* 特粗字体 */
+      color: var(--text-main-light);
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.05rem; /* 收紧字距，更精致 */
+      line-height: 1.1;
+    }
+
+    p.sub-text {
+      font-size: 1rem;
+      color: var(--text-sub-light);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* 装饰性短横线 */
+    .divider {
+      width: 40px;
+      height: 4px;
+      background-color: var(--accent-light);
+      margin: 2rem 0;
+    }
+
+    /* 错误信息框 */
+    .error-box {
+      margin-top: 1rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: var(--text-sub-light);
+      opacity: 0.8;
+    }
+
+    /* 底部元数据 */
+    .meta-footer {
+      margin-top: 3rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #999;
+    }
+    
+    .meta-footer ul { padding: 0; list-style: none; margin: 0; }
+    .meta-footer li { display: inline-block; margin-right: 1rem; }
+    
+    /* =========================================
+       4. 响应式 (Desktop)
+       ========================================= */
+    @media (min-width: 768px) {
+      .container { flex-direction: row; }
+      .info-section { width: 50%; text-align: left; padding: 0 4rem; }
+      .visual-section { width: 50%; height: auto; }
+      h1.main-title { font-size: 3.5rem; }
+    }
+
+    /* =========================================
+       5. 深色模式 (Dark Mode) - 完美匹配 #1d1d1d
+       ========================================= */
+    @media (prefers-color-scheme: dark) {
+      .info-section { background-color: var(--bg-color-dark); }
+      .visual-section { 
+        background-color: var(--bg-color-dark); /* 两边底色一致 */
+        /* 深色模式下的点阵变成淡淡的白点，增加质感 */
+        background-image: radial-gradient(var(--pattern-dot-dark) 1.5px, transparent 1.5px);
+        /* 添加一个暗角，让右侧虽然是黑的，但有光影层次，不至于死板 */
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.5); 
+      }
+      
+      h1.main-title { color: var(--text-main-dark); }
+      p.sub-text { color: var(--text-sub-dark); }
+      .divider { background-color: #ffffff; }
+      .error-box { color: #888; }
+      .meta-footer { border-top-color: rgba(255,255,255,0.1); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 左侧：文字 -->
+    <div class="info-section">
+      <div class="content-wrapper">
+        <div class="divider"></div> <!-- 装饰黑条 -->
+        <h1 class="main-title">无法连接到<br>服务器</h1>
+        
+        <p class="sub-text">请稍后再尝试访问</p>
+        <p class="sub-text">如有疑问请联系管理员反馈</p>
+        
+        <div class="error-box">
+          <!-- CF 错误代码占位符 -->
+          ::CLOUDFLARE_ERROR_500S_BOX::
+        </div>
+
+        <div class="meta-footer">
+          <ul>
+            <li>ID: ::RAY_ID::</li>
+            <li>IP: ::CLIENT_IP::</li>
+            <li>Security by Cloudflare</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：纯纹理背景 -->
+    <div class="visual-section">
+      <!-- 这里什么都不用放，全靠 CSS 渲染点阵 -->
+    </div>
+  </div>
+</body>
+</html>
